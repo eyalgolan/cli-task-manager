@@ -4,12 +4,11 @@ import bolt "go.etcd.io/bbolt"
 
 func (c Client) AllTasks() ([]Task, error) {
 	var tasks []Task
-	err := c.db.View(func(tx *bolt.Tx) error {
+	err := c.DB.View(func(tx *bolt.Tx) error {
 		b := tx.Bucket([]byte("tasks"))
+		cursor := b.Cursor()
 
-		c := b.Cursor()
-
-		for k, v := c.First(); k != nil; k, v = c.Next() {
+		for k, v := cursor.First(); k != nil; k, v = cursor.Next() {
 			tasks = append(tasks, Task{
 				Key:   btoi(k),
 				Value: string(v),
