@@ -5,12 +5,20 @@ import (
 	"time"
 )
 
-func (cfg DBConfig) Init() (*bolt.DB, error) {
-	return bolt.Open(cfg.DBPath, 0600, &bolt.Options{Timeout: 1 * time.Second})
+type DBClient struct {
+	db *bolt.DB
 }
 
-func (cfg DBConfig) CreateBucket(db *bolt.DB, bucket string) error {
-	return db.Update(func(tx *bolt.Tx) error {
+func (cfg DBConfig) Init() (*DBClient, error) {
+	db, err := bolt.Open(cfg.DBPath, 0600, &bolt.Options{Timeout: 1 * time.Second})
+	if err != nil {
+		return nil, err
+	}
+	return &DBClient{db}, nil
+}
+
+func (c DBClient) CreateBucket(bucket string) error {
+	return c.db.Update(func(tx *bolt.Tx) error {
 		_, err := tx.CreateBucketIfNotExists([]byte(bucket))
 		return err
 	})

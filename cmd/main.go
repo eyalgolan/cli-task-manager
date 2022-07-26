@@ -18,7 +18,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	err = cfg.DBConfig.CreateBucket(dbClient, "tasks")
+	err = dbClient.CreateBucket("tasks")
 	if err != nil {
 		panic(err)
 	}
