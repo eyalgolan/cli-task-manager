@@ -1,5 +1,5 @@
 package db
 
-type DBConfig struct {
+type Config struct {
 	DBPath string
 }

@@ -5,5 +5,5 @@ import (
 )
 
 type Config struct {
-	db.DBConfig
+	DBConfig db.Config
 }

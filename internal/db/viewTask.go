@@ -2,7 +2,7 @@ package db
 
 import bolt "go.etcd.io/bbolt"
 
-func (c DBClient) AllTasks() ([]Task, error) {
+func (c Client) AllTasks() ([]Task, error) {
 	var tasks []Task
 	err := c.db.View(func(tx *bolt.Tx) error {
 		b := tx.Bucket([]byte("tasks"))

@@ -13,7 +13,7 @@ func main() {
 		panic(err)
 	}
 	dbPath := filepath.Join(homeDir, "tasks.db")
-	cfg := Config{db.DBConfig{DBPath: dbPath}}
+	cfg := Config{db.Config{DBPath: dbPath}}
 	dbClient, err := cfg.DBConfig.Init()
 	if err != nil {
 		panic(err)
