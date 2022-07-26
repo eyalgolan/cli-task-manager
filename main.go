@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+	"os"
 	"task/internal/commands"
 	"task/internal/db"
 )
@@ -9,7 +11,8 @@ func main() {
 	createDB()
 	err := commands.RootCmd.Execute()
 	if err != nil {
-		panic(err)
+		fmt.Printf("unable to execture command. Error: %s", err)
+		os.Exit(1)
 	}
 }
 

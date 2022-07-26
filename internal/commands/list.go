@@ -15,15 +15,15 @@ var listCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		dbClient, err := db.Init()
 		if err != nil {
-			fmt.Printf("error in db init: %s", err.Error())
-			os.Exit(1)
-		}
-		tasks, err := dbClient.AllTasks()
-		if err != nil {
-			fmt.Printf("error getting all tasks: %s", err.Error())
+			fmt.Printf("error in db init: %s", err)
 			os.Exit(1)
 		}
 		defer dbClient.CloseDB()
+		tasks, err := dbClient.AllTasks()
+		if err != nil {
+			fmt.Printf("error getting all tasks: %s", err)
+			os.Exit(1)
+		}
 		if len(tasks) == 0 {
 			fmt.Println("Nothing to do!")
 			return

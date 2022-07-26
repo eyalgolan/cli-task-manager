@@ -4,7 +4,7 @@ import (
 	bolt "go.etcd.io/bbolt"
 )
 
-func (c Client) createTaskFunc(task string) (*int, error) {
+func (c Client) CreateTask(task string) (*int, error) {
 	var id int
 	err := c.DB.Update(func(tx *bolt.Tx) error {
 		b := tx.Bucket([]byte("tasks"))
