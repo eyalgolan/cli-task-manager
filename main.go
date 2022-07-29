@@ -17,13 +17,12 @@ func main() {
 }
 
 func createDB() {
-	dbClient, err := db.Init()
+	err := db.Init()
 	if err != nil {
 		panic(err)
 	}
-	err = dbClient.CreateBucket("tasks")
+	err = db.CreateBucket("tasks")
 	if err != nil {
 		panic(err)
 	}
-	defer dbClient.CloseDB()
 }

@@ -3,7 +3,7 @@ package commands
 import (
 	"fmt"
 	"github.com/spf13/cobra"
-	"os"
+	"log"
 	"strings"
 	"task/internal/db"
 )
@@ -13,16 +13,9 @@ var addCmd = &cobra.Command{
 	Short: "Adds a task to your task list",
 	Run: func(cmd *cobra.Command, args []string) {
 		task := strings.Join(args, " ")
-		dbClient, err := db.Init()
+		err := db.CreateTask(task)
 		if err != nil {
-			fmt.Printf("error in db init: %s", err)
-			os.Exit(1)
-		}
-		defer dbClient.CloseDB()
-		_, err = dbClient.CreateTask(task)
-		if err != nil {
-			fmt.Printf("Error adding task %s due to %s", task, err)
-			os.Exit(1)
+			log.Fatalf("Error adding task %s due to %s", task, err)
 		}
 		fmt.Printf("Added %s to your task list.\n", task)
 	},

@@ -3,7 +3,7 @@ package commands
 import (
 	"fmt"
 	"github.com/spf13/cobra"
-	"os"
+	"log"
 	"strconv"
 	"task/internal/db"
 )
@@ -14,16 +14,9 @@ var doCmd = &cobra.Command{
 	Short: "Marks a task as complete",
 	Run: func(cmd *cobra.Command, args []string) {
 		ids := parseInputIds(args)
-		dbClient, err := db.Init()
+		tasks, err := db.AllTasks()
 		if err != nil {
-			fmt.Printf("error in db init: %s", err.Error())
-			os.Exit(1)
-		}
-		defer dbClient.CloseDB()
-		tasks, err := dbClient.AllTasks()
-		if err != nil {
-			fmt.Printf("error getting all tasks: %s", err)
-			os.Exit(1)
+			log.Fatalf("error getting all tasks: %s", err)
 		}
 		for _, id := range ids {
 			if id <= 0 || id > len(tasks) {
@@ -31,7 +24,7 @@ var doCmd = &cobra.Command{
 				continue
 			}
 			task := tasks[id-1]
-			err = dbClient.DeleteTask(task.Key)
+			err = db.DeleteTask(task.Key)
 			if err != nil {
 				fmt.Printf("failed to mark %d as completed. Error: %s\n", id, err)
 			} else {

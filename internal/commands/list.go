@@ -2,7 +2,7 @@ package commands
 
 import (
 	"fmt"
-	"os"
+	"log"
 	"task/internal/db"
 
 	"github.com/spf13/cobra"
@@ -13,16 +13,9 @@ var listCmd = &cobra.Command{
 	Use:   "list",
 	Short: "Lists all of your tasks",
 	Run: func(cmd *cobra.Command, args []string) {
-		dbClient, err := db.Init()
+		tasks, err := db.AllTasks()
 		if err != nil {
-			fmt.Printf("error in db init: %s", err)
-			os.Exit(1)
-		}
-		defer dbClient.CloseDB()
-		tasks, err := dbClient.AllTasks()
-		if err != nil {
-			fmt.Printf("error getting all tasks: %s", err)
-			os.Exit(1)
+			log.Fatalf("error getting all tasks: %s", err)
 		}
 		if len(tasks) == 0 {
 			fmt.Println("Nothing to do!")
