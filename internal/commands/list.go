@@ -13,7 +13,7 @@ var listCmd = &cobra.Command{
 	Use:   "list",
 	Short: "Lists all of your tasks",
 	Run: func(cmd *cobra.Command, args []string) {
-		tasks, err := db.AllTasks()
+		tasks, err := db.AllTasks(&db.DBClient)
 		if err != nil {
 			log.Fatalf("error getting all tasks: %s", err)
 		}

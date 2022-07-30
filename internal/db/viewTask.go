@@ -2,9 +2,17 @@ package db
 
 import bolt "go.etcd.io/bbolt"
 
-func AllTasks() ([]Task, error) {
+type ViewApi interface {
+	AllTasks() ([]Task, error)
+}
+
+func AllTasks(api ViewApi) ([]Task, error) {
+	return api.AllTasks()
+}
+
+func (c *Client) AllTasks() ([]Task, error) {
 	var tasks []Task
-	err := dbClient.View(func(tx *bolt.Tx) error {
+	err := c.DB.View(func(tx *bolt.Tx) error {
 		b := tx.Bucket([]byte("tasks"))
 		cursor := b.Cursor()
 

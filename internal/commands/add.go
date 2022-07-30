@@ -13,7 +13,7 @@ var addCmd = &cobra.Command{
 	Short: "Adds a task to your task list",
 	Run: func(cmd *cobra.Command, args []string) {
 		task := strings.Join(args, " ")
-		err := db.CreateTask(task)
+		err := db.CreateTask(&db.DBClient, task)
 		if err != nil {
 			log.Fatalf("Error adding task %s due to %s", task, err)
 		}

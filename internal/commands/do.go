@@ -14,7 +14,7 @@ var doCmd = &cobra.Command{
 	Short: "Marks a task as complete",
 	Run: func(cmd *cobra.Command, args []string) {
 		ids := parseInputIds(args)
-		tasks, err := db.AllTasks()
+		tasks, err := db.AllTasks(&db.DBClient)
 		if err != nil {
 			log.Fatalf("error getting all tasks: %s", err)
 		}
@@ -24,7 +24,7 @@ var doCmd = &cobra.Command{
 				continue
 			}
 			task := tasks[id-1]
-			err = db.DeleteTask(task.Key)
+			err = db.DeleteTask(&db.DBClient, task.Key)
 			if err != nil {
 				fmt.Printf("failed to mark %d as completed. Error: %s\n", id, err)
 			} else {

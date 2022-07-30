@@ -15,11 +15,11 @@ func main() {
 }
 
 func createDB() {
-	err := db.Init()
+	err := db.Init(&db.DBClient)
 	if err != nil {
 		log.Fatalf("unable to init db. Error: %s", err)
 	}
-	err = db.CreateBucket("tasks")
+	err = db.CreateBucket(&db.DBClient, "tasks")
 	if err != nil {
 		log.Fatalf("unable to create db buckets. Error: %s", err)
 	}
