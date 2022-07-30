@@ -4,9 +4,8 @@ import (
 	"testing"
 )
 
-func Test_ExecuteCommand(t *testing.T) {
-	cmd := RootCmd
-	err := cmd.Execute()
+func Test_RootCommand(t *testing.T) {
+	err := RootCmd.Execute()
 	if err != nil {
 		t.Fatal(err)
 	}
