@@ -7,7 +7,7 @@ import (
 	"testing"
 )
 
-func Test_AddCommand(t *testing.T) {
+func Test_ListCommand(t *testing.T) {
 	cmd := AddCmd(&db.MockDB)
 	b := bytes.NewBufferString("")
 	cmd.SetOut(b)

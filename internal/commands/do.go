@@ -8,30 +8,31 @@ import (
 	"task/internal/db"
 )
 
-// doCmd represents the do command
-var doCmd = &cobra.Command{
-	Use:   "do",
-	Short: "Marks a task as complete",
-	Run: func(cmd *cobra.Command, args []string) {
-		ids := parseInputIds(args)
-		tasks, err := db.AllTasks(&db.DBClient)
-		if err != nil {
-			log.Fatalf("error getting all tasks: %s", err)
-		}
-		for _, id := range ids {
-			if id <= 0 || id > len(tasks) {
-				fmt.Printf("invalid task number %d\n", id)
-				continue
-			}
-			task := tasks[id-1]
-			err = db.DeleteTask(&db.DBClient, task.Key)
+func DoCmd(doApi db.DeleteApi, viewApi db.ViewApi) *cobra.Command {
+	return &cobra.Command{
+		Use:   "do",
+		Short: "Marks a task as complete",
+		Run: func(cmd *cobra.Command, args []string) {
+			ids := parseInputIds(args)
+			tasks, err := db.AllTasks(viewApi)
 			if err != nil {
-				fmt.Printf("failed to mark %d as completed. Error: %s\n", id, err)
-			} else {
-				fmt.Printf("Marked %d as completed\n", id)
+				log.Fatalf("error getting all tasks: %s", err)
 			}
-		}
-	},
+			for _, id := range ids {
+				if id <= 0 || id > len(tasks) {
+					fmt.Printf("invalid task number %d\n", id)
+					continue
+				}
+				task := tasks[id-1]
+				err = db.DeleteTask(doApi, task.Key)
+				if err != nil {
+					fmt.Printf("failed to mark %d as completed. Error: %s\n", id, err)
+				} else {
+					fmt.Printf("Marked %d as completed\n", id)
+				}
+			}
+		},
+	}
 }
 
 func parseInputIds(args []string) []int {
@@ -47,5 +48,5 @@ func parseInputIds(args []string) []int {
 	return ids
 }
 func init() {
-	RootCmd.AddCommand(doCmd)
+	RootCmd.AddCommand(DoCmd(&db.DBClient, &db.DBClient))
 }

@@ -18,7 +18,7 @@ func AddCmd(api db.CreateAPI) *cobra.Command {
 			if err != nil {
 				log.Fatalf("Error adding task %s due to %s", task, err)
 			}
-			fmt.Printf("Added %s to your task list.\n", task)
+			fmt.Fprintf(cmd.OutOrStdout(), "Added %s to your task list.\n", task)
 		},
 	}
 }
