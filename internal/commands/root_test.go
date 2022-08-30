@@ -1,8 +1,6 @@
 package commands
 
-import (
-	"testing"
-)
+import "testing"
 
 func Test_RootCommand(t *testing.T) {
 	err := RootCmd.Execute()

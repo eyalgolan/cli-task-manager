@@ -2,16 +2,22 @@ package commands
 
 import (
 	"bytes"
+	"fmt"
 	"io/ioutil"
+	"strings"
 	"task/internal/db"
 	"testing"
 )
 
 func Test_ListCommand(t *testing.T) {
-	cmd := AddCmd(&db.MockDB)
+	err := db.CreateTask(&db.MockDB, "task")
+	if err != nil {
+		t.Fatal(err)
+	}
+	cmd := ListCmd(&db.MockDB)
 	b := bytes.NewBufferString("")
 	cmd.SetOut(b)
-	err := cmd.Execute()
+	err = cmd.Execute()
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19,7 +25,8 @@ func Test_ListCommand(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if string(out) != "hi" {
-		t.Fatalf("expected \"%s\" got \"%s\"", "hi", string(out))
+	expectedOutput := fmt.Sprintf("%d. task", 1)
+	if !strings.Contains(string(out), expectedOutput) {
+		t.Fatalf("expected output to contain \"%s\" got \"%s\"", expectedOutput, string(out))
 	}
 }

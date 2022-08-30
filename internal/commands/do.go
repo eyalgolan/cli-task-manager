@@ -20,7 +20,7 @@ func DoCmd(doApi db.DeleteApi, viewApi db.ViewApi) *cobra.Command {
 			}
 			for _, id := range ids {
 				if id <= 0 || id > len(tasks) {
-					fmt.Printf("invalid task number %d\n", id)
+					fmt.Fprintf(cmd.OutOrStdout(), "invalid task number %d\n", id)
 					continue
 				}
 				task := tasks[id-1]
@@ -28,7 +28,7 @@ func DoCmd(doApi db.DeleteApi, viewApi db.ViewApi) *cobra.Command {
 				if err != nil {
 					fmt.Printf("failed to mark %d as completed. Error: %s\n", id, err)
 				} else {
-					fmt.Printf("Marked %d as completed\n", id)
+					fmt.Fprintf(cmd.OutOrStdout(), "Marked %d as completed\n", id)
 				}
 			}
 		},
