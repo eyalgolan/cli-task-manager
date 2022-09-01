@@ -3,17 +3,18 @@ package commands
 import (
 	"fmt"
 	"log"
-	"task/internal/db"
+	"task/internal/db_utils"
+	"task/internal/db_utils/bolt_utils"
 
 	"github.com/spf13/cobra"
 )
 
-func ListCmd(api db.ViewApi) *cobra.Command {
+func ListCmd(api db_utils.ViewApi) *cobra.Command {
 	return &cobra.Command{
 		Use:   "list",
 		Short: "Lists all of your tasks",
 		Run: func(cmd *cobra.Command, args []string) {
-			tasks, err := db.AllTasks(api)
+			tasks, err := db_utils.AllTasks(api)
 			if err != nil {
 				log.Fatalf("error getting all tasks: %s", err)
 			}
@@ -30,5 +31,5 @@ func ListCmd(api db.ViewApi) *cobra.Command {
 }
 
 func init() {
-	RootCmd.AddCommand(ListCmd(&db.DBClient))
+	RootCmd.AddCommand(ListCmd(&bolt_utils.DBClient))
 }

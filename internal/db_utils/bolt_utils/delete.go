@@ -1,14 +1,6 @@
-package db
+package bolt_utils
 
 import bolt "go.etcd.io/bbolt"
-
-type DeleteApi interface {
-	DeleteTask(key int) error
-}
-
-func DeleteTask(api DeleteApi, key int) error {
-	return api.DeleteTask(key)
-}
 
 func (c *Client) DeleteTask(key int) error {
 	return c.DB.Update(func(tx *bolt.Tx) error {

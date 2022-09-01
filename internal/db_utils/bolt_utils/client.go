@@ -1,4 +1,4 @@
-package db
+package bolt_utils
 
 import (
 	"github.com/mitchellh/go-homedir"
@@ -32,11 +32,11 @@ func (c *Client) Init() error {
 	if err != nil {
 		return errors.Wrap(err, "get the user's home dir")
 	}
-	dbPath := filepath.Join(homeDir, "tasks.db")
+	dbPath := filepath.Join(homeDir, "tasks.db_utils")
 
 	c.DB, err = bolt.Open(dbPath, 0600, &bolt.Options{Timeout: 1 * time.Second})
 	if err != nil {
-		return errors.Wrap(err, "open db")
+		return errors.Wrap(err, "open db_utils")
 	}
 	return nil
 }

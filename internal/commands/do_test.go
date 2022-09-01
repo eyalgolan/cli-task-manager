@@ -5,16 +5,16 @@ import (
 	"fmt"
 	"io/ioutil"
 	"strings"
-	"task/internal/db"
+	"task/internal/db_utils"
 	"testing"
 )
 
 func Test_DoCmd(t *testing.T) {
-	err := db.CreateTask(&db.MockDB, "task")
+	err := db_utils.CreateTask(&db_utils.MockDB, "task")
 	if err != nil {
 		t.Fatal(err)
 	}
-	cmd := DoCmd(&db.MockDB, &db.MockDB)
+	cmd := DoCmd(&db_utils.MockDB, &db_utils.MockDB)
 	b := bytes.NewBufferString("")
 	cmd.SetOut(b)
 	cmd.SetArgs([]string{"1"})

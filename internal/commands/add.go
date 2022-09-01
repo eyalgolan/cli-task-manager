@@ -5,16 +5,17 @@ import (
 	"github.com/spf13/cobra"
 	"log"
 	"strings"
-	"task/internal/db"
+	"task/internal/db_utils"
+	"task/internal/db_utils/bolt_utils"
 )
 
-func AddCmd(api db.CreateAPI) *cobra.Command {
+func AddCmd(api db_utils.CreateAPI) *cobra.Command {
 	return &cobra.Command{
 		Use:   "add",
 		Short: "Adds a task to your task list",
 		Run: func(cmd *cobra.Command, args []string) {
 			task := strings.Join(args, " ")
-			err := db.CreateTask(api, task)
+			err := db_utils.CreateTask(api, task)
 			if err != nil {
 				log.Fatalf("Error adding task %s due to %s", task, err)
 			}
@@ -24,5 +25,5 @@ func AddCmd(api db.CreateAPI) *cobra.Command {
 }
 
 func init() {
-	RootCmd.AddCommand(AddCmd(&db.DBClient))
+	RootCmd.AddCommand(AddCmd(&bolt_utils.DBClient))
 }

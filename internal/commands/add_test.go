@@ -4,12 +4,12 @@ import (
 	"bytes"
 	"io/ioutil"
 	"strings"
-	"task/internal/db"
+	"task/internal/db_utils"
 	"testing"
 )
 
 func Test_AddCommand(t *testing.T) {
-	cmd := AddCmd(&db.MockDB)
+	cmd := AddCmd(&db_utils.MockDB)
 	b := bytes.NewBufferString("")
 	cmd.SetOut(b)
 	cmd.SetArgs([]string{"task"})

@@ -1,4 +1,4 @@
-package db
+package bolt_utils
 
 import "encoding/binary"
 

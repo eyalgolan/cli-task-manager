@@ -1,16 +1,6 @@
-package db
+package bolt_utils
 
-import (
-	bolt "go.etcd.io/bbolt"
-)
-
-type CreateAPI interface {
-	CreateTask(task string) error
-}
-
-func CreateTask(api CreateAPI, task string) error {
-	return api.CreateTask(task)
-}
+import bolt "go.etcd.io/bbolt"
 
 func (c *Client) CreateTask(task string) error {
 	err := c.DB.Update(func(tx *bolt.Tx) error {
