@@ -1,6 +1,8 @@
 package bolt_utils
 
-import bolt "go.etcd.io/bbolt"
+import (
+	bolt "go.etcd.io/bbolt"
+)
 
 func (c *Client) CreateTask(task string) error {
 	err := c.DB.Update(func(tx *bolt.Tx) error {

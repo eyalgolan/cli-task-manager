@@ -14,20 +14,7 @@ type Client struct {
 
 var DBClient = Client{}
 
-type InitAPI interface {
-	Init() error
-	CreateBucket(bucket string) error
-}
-
-func Init(api InitAPI) error {
-	return api.Init()
-}
-
-func CreateBucket(api InitAPI, bucket string) error {
-	return api.CreateBucket(bucket)
-}
-
-func (c *Client) Init() error {
+func Init(c Client, bucket string) error {
 	homeDir, err := homedir.Dir()
 	if err != nil {
 		return errors.Wrap(err, "get the user's home dir")
@@ -38,10 +25,7 @@ func (c *Client) Init() error {
 	if err != nil {
 		return errors.Wrap(err, "open db_utils")
 	}
-	return nil
-}
 
-func (c *Client) CreateBucket(bucket string) error {
 	return c.DB.Update(func(tx *bolt.Tx) error {
 		_, err := tx.CreateBucketIfNotExists([]byte(bucket))
 		return err

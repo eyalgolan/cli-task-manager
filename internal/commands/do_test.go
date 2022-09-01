@@ -5,20 +5,16 @@ import (
 	"fmt"
 	"io/ioutil"
 	"strings"
-	"task/internal/db_utils"
+	"task/internal/db_utils/mock_utils"
 	"testing"
 )
 
-func Test_DoCmd(t *testing.T) {
-	err := db_utils.CreateTask(&db_utils.MockDB, "task")
-	if err != nil {
-		t.Fatal(err)
-	}
-	cmd := DoCmd(&db_utils.MockDB, &db_utils.MockDB)
+func Test_DoCmdHappyFlow(t *testing.T) {
+	cmd := DoCmd(&mock_utils.MockHappyFlowDB)
 	b := bytes.NewBufferString("")
 	cmd.SetOut(b)
 	cmd.SetArgs([]string{"1"})
-	err = cmd.Execute()
+	err := cmd.Execute()
 	if err != nil {
 		t.Fatal(err)
 	}

@@ -6,15 +6,16 @@ import (
 	"io/ioutil"
 	"strings"
 	"task/internal/db_utils"
+	"task/internal/db_utils/mock_utils"
 	"testing"
 )
 
 func Test_ListCommand(t *testing.T) {
-	err := db_utils.CreateTask(&db_utils.MockDB, "task")
+	err := db_utils.CreateTask(&mock_utils.MockHappyFlowDB, "task")
 	if err != nil {
 		t.Fatal(err)
 	}
-	cmd := ListCmd(&db_utils.MockDB)
+	cmd := ListCmd(&mock_utils.MockHappyFlowDB)
 	b := bytes.NewBufferString("")
 	cmd.SetOut(b)
 	err = cmd.Execute()
