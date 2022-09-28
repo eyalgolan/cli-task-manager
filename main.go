@@ -2,25 +2,16 @@ package main
 
 import (
 	"log"
-	"task/internal/commands"
-	"task/internal/db"
+	"task/internal/db_utils/bolt_utils"
 )
 
 func main() {
-	createDB()
-	err := commands.RootCmd.Execute()
+	err := bolt_utils.Init(bolt_utils.DBClient, "tasks")
 	if err != nil {
-		log.Fatalf("unable to execture command. Error: %s", err)
+		log.Fatalf("unable to init db_utils. Error: %s", err)
 	}
-}
-
-func createDB() {
-	err := db.Init()
-	if err != nil {
-		log.Fatalf("unable to init db. Error: %s", err)
-	}
-	err = db.CreateBucket("tasks")
-	if err != nil {
-		log.Fatalf("unable to create db buckets. Error: %s", err)
-	}
+	//err = commands.RootCmd.Execute()
+	//if err != nil {
+	//	log.Fatalf("unable to execture command. Error: %s", err)
+	//}
 }
