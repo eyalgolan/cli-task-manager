@@ -1,6 +1,6 @@
 package mock_utils
 
-import "cli_task_manager/internal/db_utils"
+import "github.com/eyalgolan/cli-task-manager/internal/db_utils"
 
 type MockHappyFlowClient struct {
 }

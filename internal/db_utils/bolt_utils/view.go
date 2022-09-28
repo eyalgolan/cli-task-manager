@@ -1,7 +1,7 @@
 package bolt_utils
 
 import (
-	"cli_task_manager/internal/db_utils"
+	"github.com/eyalgolan/cli-task-manager/internal/db_utils"
 	bolt "go.etcd.io/bbolt"
 )
 

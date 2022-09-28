@@ -1,4 +1,4 @@
-module cli_task_manager
+module github.com/eyalgolan/cli-task-manager
 
 go 1.18
 

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"cli_task_manager/internal/db_utils/bolt_utils"
+	"github.com/eyalgolan/cli-task-manager/internal/db_utils/bolt_utils"
 	"log"
 )
 

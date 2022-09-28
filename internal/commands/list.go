@@ -1,9 +1,9 @@
 package commands
 
 import (
-	"cli_task_manager/internal/db_utils"
-	"cli_task_manager/internal/db_utils/bolt_utils"
 	"fmt"
+	"github.com/eyalgolan/cli-task-manager/internal/db_utils"
+	"github.com/eyalgolan/cli-task-manager/internal/db_utils/bolt_utils"
 	"log"
 
 	"github.com/spf13/cobra"
