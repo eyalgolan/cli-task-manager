@@ -1,4 +1,4 @@
-module task
+module cli_task_manager
 
 go 1.18
 

@@ -1,10 +1,10 @@
 package commands
 
 import (
+	"cli_task_manager/internal/db_utils"
+	"cli_task_manager/internal/db_utils/bolt_utils"
 	"fmt"
 	"log"
-	"task/internal/db_utils"
-	"task/internal/db_utils/bolt_utils"
 
 	"github.com/spf13/cobra"
 )

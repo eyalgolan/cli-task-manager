@@ -1,8 +1,8 @@
 package main
 
 import (
+	"cli_task_manager/internal/db_utils/bolt_utils"
 	"log"
-	"task/internal/db_utils/bolt_utils"
 )
 
 func main() {

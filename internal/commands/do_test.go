@@ -2,10 +2,10 @@ package commands
 
 import (
 	"bytes"
+	"cli_task_manager/internal/db_utils/mock_utils"
 	"fmt"
 	"io/ioutil"
 	"strings"
-	"task/internal/db_utils/mock_utils"
 	"testing"
 )
 

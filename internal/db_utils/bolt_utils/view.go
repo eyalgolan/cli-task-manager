@@ -1,8 +1,8 @@
 package bolt_utils
 
 import (
+	"cli_task_manager/internal/db_utils"
 	bolt "go.etcd.io/bbolt"
-	"task/internal/db_utils"
 )
 
 func (c *Client) AllTasks() ([]db_utils.Task, error) {

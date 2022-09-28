@@ -1,11 +1,11 @@
 package commands
 
 import (
+	"cli_task_manager/internal/db_utils"
+	"cli_task_manager/internal/db_utils/bolt_utils"
 	"fmt"
 	"github.com/spf13/cobra"
 	"strings"
-	"task/internal/db_utils"
-	"task/internal/db_utils/bolt_utils"
 )
 
 func AddCmd(api db_utils.CreateAPI) *cobra.Command {
