@@ -1,6 +1,6 @@
 # Cli Task Manager
 
-[![GitHub Workflow Status](https://github.com/eyalgolan/cli-task-manager/actions/workflows/go.yml/badge.svg)](https://github.com/eyalgolan/cli-task-manager/actions/workflows/go.yml)
+[![Build](https://github.com/eyalgolan/cli-task-manager/actions/workflows/build.yml/badge.svg)](https://github.com/eyalgolan/cli-task-manager/actions/workflows/build.yml)
 
 This is a CLI tool that can be used to manage your TODOs in the terminal.
 
