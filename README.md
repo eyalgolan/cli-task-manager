@@ -1,6 +1,7 @@
 # Cli Task Manager
 
 [![Build](https://github.com/eyalgolan/cli-task-manager/actions/workflows/build.yml/badge.svg)](https://github.com/eyalgolan/cli-task-manager/actions/workflows/build.yml)
+[![Go Report Card](https://goreportcard.com/badge/github.com/eyalgolan/cli-task-manager)](https://goreportcard.com/report/github.com/eyalgolan/cli-task-manager)
 
 This is a CLI tool that can be used to manage your TODOs in the terminal.
 
